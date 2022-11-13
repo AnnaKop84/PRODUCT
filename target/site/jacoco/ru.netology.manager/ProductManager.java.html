@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">PRODUCT</a> &gt; <a href="index.source.html" class="el_package">ru.netology.manager</a> &gt; <span class="el_source">ProductManager.java</span></div><h1>ProductManager.java</h1><pre class="source lang-java linenums">package ru.netology.manager;
+
+import ru.netology.product.Product;
+import ru.netology.repository.ProductRepository;
+
+<span class="fc" id="L6">public class ProductManager {</span>
+<span class="fc" id="L7">    private ProductRepository repository = new ProductRepository();</span>
+
+    public void add(Product productAdd) {
+<span class="fc" id="L10">        repository.add(productAdd);</span>
+<span class="fc" id="L11">    }</span>
+
+    public Product[] findAllProduct() {
+<span class="fc" id="L14">        return repository.findAllProduct();</span>
+    }
+
+    public void remove(int id) {
+<span class="fc" id="L18">        repository.remove(id);</span>
+<span class="fc" id="L19">    }</span>
+
+    public Product[] searchBy(String text) {
+<span class="fc" id="L22">        Product[] results = new Product[0];</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        for (Product products : repository.findAllProduct()) {</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            if (matches(products, text)) {</span>
+<span class="fc" id="L25">                Product[] tmp = new Product[results.length + 1];</span>
+<span class="fc" id="L26">                int i=0;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">                for (Product result:results) {</span>
+<span class="fc" id="L28">                    tmp[i] = result;</span>
+<span class="fc" id="L29">                    i++;</span>
+                }
+<span class="fc" id="L31">                tmp[results.length]=products;</span>
+<span class="fc" id="L32">                results = tmp;</span>
+            }
+        }
+<span class="fc" id="L35">        return results;</span>
+
+
+    }
+
+
+    public boolean matches(Product products, String search) {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (products.getName().contains(search)) {</span>
+<span class="fc" id="L43">            return true;</span>
+        } else {
+<span class="fc" id="L45">            return false;</span>
+        }
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

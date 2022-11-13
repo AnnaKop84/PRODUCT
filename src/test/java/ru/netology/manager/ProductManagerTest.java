@@ -19,11 +19,11 @@ public class ProductManagerTest {
     ProductManager managerNothing = new ProductManager();
     ProductManager managerOneProduct = new ProductManager();
     ProductManager managerAll = new ProductManager();
-    Product book1 = new Book(1, "Книга 1", 100, "Иванов И.И.");
+    Product book1 = new Book(1, "Книга 1000", 100, "Иванов И.И.");
     Product book2 = new Book(2, "Книга 2", 200, "Петров И.И");
-    Product book3 = new Book(3, "Книга 4 ", 543, "Сидоров В.В");
+    Product book3 = new Book(3, "Книга 4 ", 1000, "Сидоров В.В");
 
-    Product phone1 = new SmartPhone(4, "Sam1", 1000, "Samsung");
+    Product phone1 = new SmartPhone(4, "Sam1000", 1000, "Samsung");
     Product phone2 = new SmartPhone(5, "Sam2", 5000, "Samsung");
     Product phone3 = new SmartPhone(6, "Sam3", 4000, "Samsung");
 
@@ -99,12 +99,27 @@ public class ProductManagerTest {
 
     @Test
     void shouldSearchBy() {
-        Product[] returnEmpty = new Product[0];
-        doReturn(returnEmpty).when(repo).findAllProduct();
-        Product[] expect = new Product[0];
-        assertArrayEquals(expect, managerMockito.searchBy(""));
+        String name = "Книга 1";
+        Product[] expected = {book1};
+        Product[] actual = managerAll.searchBy(name);
+        assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void shouldSearchManyProducts() {
+        String name = "1000";
+        Product[] expected = {book1, phone1};
+        Product[] actual = managerAll.searchBy(name);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchNoting() {
+        String name = "Сказки";
+        Product[] expected = {};
+        Product[] actual = managerAll.searchBy(name);
+        assertArrayEquals(expected, actual);
+    }
 
 }
 

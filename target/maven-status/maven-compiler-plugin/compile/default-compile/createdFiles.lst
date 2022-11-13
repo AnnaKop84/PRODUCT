@@ -1,0 +1,6 @@
+ru\netology\product\Book.class
+ru\netology\product\NotFoundException.class
+ru\netology\repository\ProductRepository.class
+ru\netology\manager\ProductManager.class
+ru\netology\product\Product.class
+ru\netology\product\SmartPhone.class
